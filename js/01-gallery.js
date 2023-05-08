@@ -37,13 +37,19 @@ function createModal(src) {
         `<div class="modal">
             <img src="${src}" width="1280">
         </div>`,
-    ).show((modal) => {
-        document.addEventListener("keydown", (event) => {
-            if (event.keyCode !== 27)
-                return;
-            console.log("Так, Esc працює досі, допоможіть зрозуміти чому...");
-            modal.close();
-        });
-    });
+        {
+            onShow: (modal) => {
+                document.onkeydown = (event) => {
+                    if (event.key !== "Escape")
+                        return;
+                    console.log("Ви натиснули на Escape!");
+                    modal.close();
+                };
+            },
+            onClose: () => {
+                // Кращого варіанту я не зміг вигадати, але я навчився чомусь новому
+                document.onkeydown = null;
+            }
+        }
+    ).show();
 }
-

@@ -16,15 +16,4 @@ const markup = galleryItems.map(item =>
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
-gallery.addEventListener("click", imageClickHandler);
-
-function imageClickHandler(event) {
-    if (event.target.tagName !== "IMG")
-        return;
-    event.preventDefault();
-    
-    const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
-    // Без цього на сайті продовжують стакатись лайтбокси.
-    // Якщо є якийсь інший спосіб запобігти цьому, то підкажіть будь ласка.
-    gallery.removeEventListener("click", imageClickHandler);
-}
+const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
